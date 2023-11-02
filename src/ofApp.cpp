@@ -3,8 +3,15 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    // set up serial
-    serial.setup(SERIAL_PORT, BAUD_RATE);
+    // try to setup serial connection
+    if (serial.setup(SERIAL_PORT, BAUD_RATE))
+    {
+        ofLogNotice("setup") << "Successfully connected to Arduino.";
+    }
+    else
+    {
+        ofLogError("setup") << "Unable to connect to Arduino.";
+    }
 
     vid.load("video.mp4");
     vid.setLoopState(OF_LOOP_NORMAL);
