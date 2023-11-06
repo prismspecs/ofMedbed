@@ -19,8 +19,9 @@ public:
 	ofTrueTypeFont myFont;
 
 	ofSerial serial;
-	#define SERIAL_PORT "/dev/cu.usbmodem1101"
-	#define BAUD_RATE 38400
+	// #define SERIAL_PORT "/dev/cu.usbmodem1101"
+	#define SERIAL_PORT "/dev/ttyUSB0"
+	#define BAUD_RATE 115200
 	ofVideoPlayer vid;
 	// ofSoundPlayer sound1;
 	ofxJSONElement json;

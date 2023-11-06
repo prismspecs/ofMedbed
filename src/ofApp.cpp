@@ -4,6 +4,7 @@
 void ofApp::setup()
 {
     // try to setup serial connection
+    serial.listDevices();
     if (serial.setup(SERIAL_PORT, BAUD_RATE))
     {
         ofLogNotice("setup") << "Successfully connected to Arduino.";
@@ -13,7 +14,7 @@ void ofApp::setup()
         ofLogError("setup") << "Unable to connect to Arduino.";
     }
 
-    vid.load("video.mp4");
+    vid.load("final.webm");
     vid.setLoopState(OF_LOOP_NORMAL);
     duration_seconds = vid.getDuration();
     ofLogNotice("setup") << "Video duration: " << duration_seconds << " seconds.";
@@ -93,8 +94,18 @@ void ofApp::draw()
         // draw text to screen "test mode" with large font
         int spacing = 40;
         myFont.drawString("TEST MODE", spacing, spacing * 2);
-        myFont.drawString("Q: LEDs Red", spacing, spacing * 4);
+        // LED commands
+        myFont.drawString("Q: LEDs Off", spacing, spacing * 4);
         myFont.drawString("W: LEDs Blue", spacing, spacing * 5);
+        myFont.drawString("E: LEDs Red", spacing, spacing * 6);
+        // scanner commands
+        myFont.drawString("R: Scanner Stop", spacing, spacing * 8);
+        myFont.drawString("T: Scanner Forward", spacing, spacing * 9);
+        myFont.drawString("Y/Z: Scanner Reverse", spacing, spacing * 10);
+        // tilt commands
+        myFont.drawString("U: Tilt Stop", spacing, spacing * 12);
+        myFont.drawString("I: Tilt Up", spacing, spacing * 13);
+        myFont.drawString("O: Tilt Down", spacing, spacing * 14);
     }
 }
 
@@ -112,15 +123,58 @@ void ofApp::keyPressed(int key)
     {
         ofToggleFullscreen();
     }
-    else if (key == 't')
+    else if (key == 'm')
     {
         test_mode = !test_mode;
         ofLogNotice("keyPressed") << "Test mode: " << (test_mode ? "activated" : "deactivated");
     }
-    else if (key == 'q')
+    // LEDs
+    if (test_mode && key == 'q')
+    {
+        ofLogNotice("quick command") << "LEDs Off";
+        sendSerial("LEDs,0");
+    }
+    if (test_mode && key == 'w')
+    {
+        ofLogNotice("quick command") << "LEDs Blue";
+        sendSerial("LEDs,1");
+    }
+    if (test_mode && key == 'e')
     {
         ofLogNotice("quick command") << "LEDs Red";
-        sendSerial("LEDs,1");
+        sendSerial("LEDs,2");
+    }
+    // scan motor
+    if (test_mode && key == 'r')
+    {
+        ofLogNotice("quick command") << "Scanner Stop";
+        sendSerial("DEBUG,0");
+    }
+    if (test_mode && key == 't')
+    {
+        ofLogNotice("quick command") << "Scanner Forward";
+        sendSerial("DEBUG,9");
+    }
+    if (test_mode && key == 'y')
+    {
+        ofLogNotice("quick command") << "Scanner Reverse";
+        sendSerial("DEBUG,11");
+    }
+    // tilt motor
+    if (test_mode && key == 'u')
+    {
+        ofLogNotice("quick command") << "Tilt Stop";
+        sendSerial("Tilt,0");
+    }
+    if (test_mode && key == 'i')
+    {
+        ofLogNotice("quick command") << "Tilt Up";
+        sendSerial("Tilt,1");
+    }
+    if (test_mode && key == 'o')
+    {
+        ofLogNotice("quick command") << "Tilt Down";
+        sendSerial("Tilt,2");
     }
 }
 //--------------------------------------------------------------
