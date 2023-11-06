@@ -104,8 +104,12 @@ void ofApp::draw()
         myFont.drawString("Y/Z: Scanner Reverse", spacing, spacing * 10);
         // tilt commands
         myFont.drawString("U: Tilt Stop", spacing, spacing * 12);
-        myFont.drawString("I: Tilt Up", spacing, spacing * 13);
-        myFont.drawString("O: Tilt Down", spacing, spacing * 14);
+        myFont.drawString("I: Tilt Back", spacing, spacing * 13);
+        myFont.drawString("O: Tilt Forward", spacing, spacing * 14);
+        // door commands
+        myFont.drawString("A: Doors Stop", spacing, spacing * 16);
+        myFont.drawString("S: Doors Close", spacing, spacing * 17);
+        myFont.drawString("D: Doors Open", spacing, spacing * 18);
     }
 }
 
@@ -168,13 +172,28 @@ void ofApp::keyPressed(int key)
     }
     if (test_mode && key == 'i')
     {
-        ofLogNotice("quick command") << "Tilt Up";
+        ofLogNotice("quick command") << "Tilt Back";
         sendSerial("Tilt,1");
     }
     if (test_mode && key == 'o')
     {
-        ofLogNotice("quick command") << "Tilt Down";
+        ofLogNotice("quick command") << "Tilt Forward";
         sendSerial("Tilt,2");
+    }
+    if (test_mode && key == 'a')
+    {
+        ofLogNotice("quick command") << "Doors Stop";
+        sendSerial("Doors,0");
+    }
+    if (test_mode && key == 's')
+    {
+        ofLogNotice("quick command") << "Doors Close";
+        sendSerial("Doors,1");
+    }
+    if (test_mode && key == 'd')
+    {
+        ofLogNotice("quick command") << "Doors Open";
+        sendSerial("Doors,2");
     }
 }
 //--------------------------------------------------------------

@@ -27,5 +27,5 @@ public:
 	ofxJSONElement json;
 	float duration_seconds;
 
-	bool test_mode = false;
+	bool test_mode = true;
 };
