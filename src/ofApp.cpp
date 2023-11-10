@@ -200,6 +200,9 @@ void ofApp::keyPressed(int key)
 //--------------------------------------------------------------
 void ofApp::sendSerial(string arduinoData)
 {
+
+    ofLogNotice("serial") << arduinoData;
+
     // Your string to be sent over serial
     string myString = arduinoData;
 
