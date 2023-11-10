@@ -18,9 +18,9 @@ public:
 	ofTrueTypeFont myFont;
 
 	ofSerial serial;
-	// #define SERIAL_PORT "/dev/cu.usbmodem1101"
+    #define SERIAL_PORT "/dev/cu.usbmodem1101"
 	// #define SERIAL_PORT "/dev/ttyUSB0"
-	#define SERIAL_PORT "/dev/ttyACM0" // UNO
+//	#define SERIAL_PORT "/dev/ttyACM0" // UNO
 	#define BAUD_RATE 115200
 	
 

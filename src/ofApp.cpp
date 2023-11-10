@@ -98,7 +98,7 @@ void ofApp::draw()
         // LED commands
         myFont.drawString("Q: LEDs Off", spacing, spacing * 4);
         myFont.drawString("W: LEDs Blue", spacing, spacing * 5);
-        myFont.drawString("E: LEDs Red", spacing, spacing * 6);
+        myFont.drawString("E: LEDs Purple", spacing, spacing * 6);
         // scanner commands
         myFont.drawString("R: Scanner Stop", spacing, spacing * 8);
         myFont.drawString("T: Scanner Forward", spacing, spacing * 9);
@@ -146,8 +146,8 @@ void ofApp::keyPressed(int key)
     }
     if (test_mode && key == 'e')
     {
-        ofLogNotice("quick command") << "LEDs Red";
-        sendSerial("LEDs,2\n");
+        ofLogNotice("quick command") << "LEDs Purple";
+        sendSerial("LEDs,4\n");
     }
     // scan motor
     if (test_mode && key == 'r')
