@@ -43,6 +43,7 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
+
     if (!test_mode)
     {
         vid.update();
@@ -136,17 +137,17 @@ void ofApp::keyPressed(int key)
     if (test_mode && key == 'q')
     {
         ofLogNotice("quick command") << "LEDs Off";
-        sendSerial("LEDs,0");
+        sendSerial("LEDs,0\n");
     }
     if (test_mode && key == 'w')
     {
         ofLogNotice("quick command") << "LEDs Blue";
-        sendSerial("LEDs,1");
+        sendSerial("LEDs,1\n");
     }
     if (test_mode && key == 'e')
     {
         ofLogNotice("quick command") << "LEDs Red";
-        sendSerial("LEDs,2");
+        sendSerial("LEDs,2\n");
     }
     // scan motor
     if (test_mode && key == 'r')
@@ -193,7 +194,7 @@ void ofApp::keyPressed(int key)
     if (test_mode && key == 'd')
     {
         ofLogNotice("quick command") << "Doors Open";
-        sendSerial("Doors,2");
+        sendSerial("Doors,2\n");
     }
 }
 //--------------------------------------------------------------
@@ -207,18 +208,4 @@ void ofApp::sendSerial(string arduinoData)
 
     // Write the string to the serial port
     serial.writeBytes((unsigned char *)cString, myString.length());
-}
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key)
-{
-}
-
-//--------------------------------------------------------------
-void ofApp::sendSerialData()
-{
-    // Data to send (replace with your data)
-    unsigned char dataToSend = 42; // Change this to the data you want to send
-
-    // Send the data as a single byte
-    serial.writeByte(dataToSend);
 }
