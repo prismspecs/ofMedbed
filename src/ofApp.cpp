@@ -75,6 +75,8 @@ void ofApp::update()
     else
     {
     }
+
+    readSerial();
 }
 
 //--------------------------------------------------------------
@@ -211,4 +213,27 @@ void ofApp::sendSerial(string arduinoData)
 
     // Write the string to the serial port
     serial.writeBytes((unsigned char *)cString, myString.length());
+}
+//--------------------------------------------------------------
+void ofApp::readSerial()
+{
+    if (serial.available() > 0)
+    {
+        string receivedString;
+        while (serial.available() > 0)
+        {
+
+            char byte = serial.readByte();
+            if (byte == '\n')
+            {
+                break;
+            }
+            else
+            {
+                receivedString += byte;
+            }
+        }
+        // log this
+        ofLogNotice("Received from Arduino") << receivedString;
+    }
 }

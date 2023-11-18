@@ -14,6 +14,7 @@ public:
 
 	void keyPressed(int key) override;
 	void sendSerial(string arduinoData);
+	void readSerial();
 
 	ofTrueTypeFont myFont;
 
