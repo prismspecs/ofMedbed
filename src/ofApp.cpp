@@ -137,17 +137,17 @@ void ofApp::keyPressed(int key)
     if (test_mode && key == 'q')
     {
         ofLogNotice("quick command") << "LEDs Off";
-        sendSerial("LEDs,0\n");
+        sendSerial("LEDs,0");
     }
     if (test_mode && key == 'w')
     {
         ofLogNotice("quick command") << "LEDs Blue";
-        sendSerial("LEDs,1\n");
+        sendSerial("LEDs,1");
     }
     if (test_mode && key == 'e')
     {
         ofLogNotice("quick command") << "LEDs Red";
-        sendSerial("LEDs,2\n");
+        sendSerial("LEDs,2");
     }
     // scan motor
     if (test_mode && key == 'r')
@@ -194,12 +194,14 @@ void ofApp::keyPressed(int key)
     if (test_mode && key == 'd')
     {
         ofLogNotice("quick command") << "Doors Open";
-        sendSerial("Doors,2\n");
+        sendSerial("Doors,2");
     }
 }
 //--------------------------------------------------------------
 void ofApp::sendSerial(string arduinoData)
 {
+
+    arduinoData += "\n";
 
     ofLogNotice("serial") << arduinoData;
 
