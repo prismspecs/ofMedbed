@@ -65,7 +65,7 @@ void ofApp::update()
                 // combine info into a string
                 string arduinoData = json[i]["selectedOption"].asString() + "," + json[i]["integerValue"].asString();
 
-                ofLogNotice("json") << "command: " << arduinoData;
+                ofLogNotice("json") << "time" << json[i]["time"] << "command: " << arduinoData;
 
                 // send to arduino
                 // bool bytesWereWritten = serial.writeBytes((unsigned char *)arduinoData.c_str(), arduinoData.size());
@@ -163,17 +163,17 @@ void ofApp::keyPressed(int key)
     if (test_mode && key == 'r')
     {
         ofLogNotice("quick command") << "Scanner Stop";
-        sendSerial("DEBUG,0");
+        sendSerial("Scanner,0");
     }
     if (test_mode && key == 't')
     {
         ofLogNotice("quick command") << "Scanner towards Head";
-        sendSerial("DEBUG,9");
+        sendSerial("Scanner,1");
     }
     if (test_mode && key == 'y')
     {
         ofLogNotice("quick command") << "Scanner towards Feet";
-        sendSerial("DEBUG,11");
+        sendSerial("Scanner,2");
     }
     // tilt motor
     if (test_mode && key == 'u')
@@ -326,6 +326,10 @@ unsigned char ofApp::mapDataToByte(string data)
     if (arduinoData == "Home,0")
     {
         myByte = 0;
+    }
+    if (arduinoData == "Home,1")
+    {
+        myByte = 1;
     }
     else if (arduinoData == "Scanner,0")
     {
